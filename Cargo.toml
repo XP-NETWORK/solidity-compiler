@@ -9,6 +9,8 @@ edition = "2018"
 [dependencies]
 thiserror = "1.0"
 reusable-fmt = "0.1.2"
+rsevmasm = "0.5"
+once_cell = "1.7"
 
 [features]
 default = [ "test_generated" ]
