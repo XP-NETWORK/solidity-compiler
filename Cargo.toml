@@ -7,11 +7,11 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-thiserror = "1.0"
-reusable-fmt = "0.1.2"
-rsevmasm = "0.5"
-once_cell = "1.7"
+reusable-fmt = { version = "0.2.0", default-features = false }
+rsevmasm = { version = "0.5", git = "https://github.com/VKint/rsevmasm", default-features = false }
+conquer-once = { version = "0.3", default-features = false }
 
 [features]
-default = [ "test_generated" ]
+default = [ "std", "test_generated" ]
 test_generated = []
+std = ["conquer-once/std", "rsevmasm/std", "reusable-fmt/std"]

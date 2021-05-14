@@ -1,5 +1,10 @@
 use rsevmasm::instructions::Instruction;
-use once_cell::sync::OnceCell;
+#[cfg(feature = "std")]
+use conquer_once::OnceCell;
+#[cfg(not(feature = "std"))]
+use conquer_once::spin::OnceCell;
+#[cfg(not(feature = "std"))]
+use alloc::{vec};
 
 #[macro_export]
 macro_rules! TEMPLATE_PAYMENT_SEND {
@@ -27,7 +32,7 @@ amount = $amount
     }
 }
 
-static PAYMENT_SEND_RAW: OnceCell<[Instruction; 179]> = OnceCell::new();
+static PAYMENT_SEND_RAW: OnceCell<[Instruction; 179]> = OnceCell::uninit();
 
 pub fn payment_send_raw_temp() -> &'static [Instruction; 179] {
     PAYMENT_SEND_RAW.get_or_init(payment_raw_init)

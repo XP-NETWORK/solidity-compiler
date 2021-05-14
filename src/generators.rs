@@ -3,6 +3,9 @@ use crate::*;
 use reusable_fmt::fmt;
 use rsevmasm::instructions::Instruction;
 
+#[cfg(not(feature = "std"))]
+use alloc::{vec::Vec, string::String, format};
+
 pub struct Generator;
 
 impl Generator {
